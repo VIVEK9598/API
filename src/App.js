@@ -15,6 +15,14 @@ class App extends Component {
       })
 
   }
+
+  handleEdit = () => {
+    console.log(" handle Edit clicked")
+  };
+
+  handleDelete = () => {
+    console.log("handle Delete clicked")
+  };
   render() {
 
     const { post } = this.state
@@ -36,20 +44,23 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>{post.map(p => {
-            return (<tr key={p.id}>
+            return (
+              <tr key={p.id}>
+                
+                <td style={mystyle}>{p.userId}</td>
+                <td style={mystyle}>{p.id}</td>
+                <td style={mystyle}>{p.title}</td>
+                <td style={mystyle}>{p.body}</td>
+                <td style={mystyle}>
+                  <button onClick={this.handleEdit}>Edit</button>
+                  <button onClick={this.handleDelete}>Delete</button>
+                </td>
 
-              <td style={mystyle}>{p.userId}</td>
-              <td style={mystyle}>{p.id}</td>
-              <td style={mystyle}>{p.title}</td>
-              <td style={mystyle}>{p.body}</td>
-
-            </tr>
+              </tr>
             )
           })
           }
           </tbody>
-
-
         </table>
       </div>
     );
