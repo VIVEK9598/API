@@ -1,33 +1,39 @@
-import React from 'react';
-import './ModalForm.css'
+import React from 'react'
+import { Dialog, DialogTitle, TextField, DialogContent, Button } from '@material-ui/core';
 
-const ModalForm = ({ handleClose, show, children }) => {
+const ModalForm = (props) => {
 
-    const showHideClassName = show ? "modal display-block" : "modal display-none";
+  const { open, onClose, editing, handleChange, doSubmit, title, body } = props
 
-    return (
-        <div className={showHideClassName}>
-            <section className="modal-main">
-                {children}
-                <button className="closebtn" onClick={handleClose}>close</button>
-                <div className="modal-body">
-    <form>
-        <label>
-            Title:
-            <input type="text" name="name" />
-        </label>
-        <label><br />
-            Body:
-             <input type="text" name="name" />
-        </label><br />
-        <input className="submit" type="submit" value="Submit" /><br />
-        <button className="update">Update</button>
-    </form>
-</div>
-            </section>
+  return (
+    <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
+      <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+      <DialogContent>
+        <form onSubmit={doSubmit} noValidate autoComplete="off">
+          <TextField
+            value={editing && title? title:null}
+            name="title"
+            onChange={handleChange}
+            id="title"
+            label="Title" /><br />
+          <TextField
+            value={editing && body?body:null}
+            name="body"
+            onChange={handleChange}
+            id="body"
+            label="Body" /><br /><br />
+          <Button type="submit" variant="contained" color="primary">
+            {editing ? "Update" : "Submit"}
+          </Button>
+         
+        </form>
 
-        </div>
-    );
-};
+      </DialogContent>
+
+
+    </Dialog>
+  )
+
+}
+
 export default ModalForm;
-
